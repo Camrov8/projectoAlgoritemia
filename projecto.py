@@ -1,23 +1,57 @@
 #Este ficheiro contem o programa pedido para o projecto final da desciplina de algoritmia
 import os
-ficheiroEstacoes = open('./Estacoes.csv','r')
 
-estacoes = ficheiroEstacoes.readlines()
+def criarEstacao():
+    print('Indique codigo da estação')
+    codigo = input().upper()
+    print('Indique o nome')
+    nome = input()
+    print('Indique a latitude')
+    latitude = input()
+    print('Indique a longitude')
+    longitude = input()
+    estacao = codigo , nome , latitude , longitude
+    print(estacao)
+     
 
-for estacao in estacoes:
-    listaEstacao = estacao.split(',')
-    codigoEstacao = listaEstacao[0]
-    nomeEstacao = listaEstacao[1]
-    coordEstacao = (listaEstacao[2],listaEstacao[3])
+def menuGestao():
+    #Codigo para adicionar estção
+    escolhaGestao = ''
+    while escolhaGestao != 'x' :
+        print('Escolha uma das opções :\n A:Adicionar estação \n X:sair')
+        escolhaGestao = input().lower()
+            
+        if escolhaGestao == 'a':
+            criarEstacao()
+            
+        elif escolhaGestao == 'x':
+            print('A sair')
+            
+        else :
+            print('Opção invalida')
+        
 
-    print(codigoEstacao, ' ', nomeEstacao, ' ',coordEstacao, ' ')
- 
+escolhaPrincipal=''
 
-#Leitura do ficheiro com todos os dados referentes as linhas .
+while escolhaPrincipal != 'x':
+    print("Menu informativo \n Escolha uma opção \n A:Gestão \n B:LISTAGEM \n C:Viagens \n X:sair")
 
-print("Menu informativo \n Escolha uma opção \n A:Gestão \n B:LISTAGEM \n C:Viagens")
+    escolhaPrincipal = input().lower()
 
-escolha = input()
+    if escolhaPrincipal == 'a':
+       menuGestao() 
+        
+                
+    elif escolhaPrincipal == 'x':
+        print('A sair')
+        
+    
+    else :
+        print('Opção invalida')
+                
+            
+
+
 
 
 
