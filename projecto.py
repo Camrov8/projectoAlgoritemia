@@ -1,6 +1,6 @@
 #Este ficheiro contem o programa pedido para o projecto final da desciplina de algoritmia
 import os
-
+#funcão para tratar adição de estações
 def criarEstacao():
     print('Indique codigo da estação')
     codigo = input().upper()
@@ -10,19 +10,52 @@ def criarEstacao():
     latitude = input()
     print('Indique a longitude')
     longitude = input()
-    estacao = codigo , nome , latitude , longitude
-    print(estacao)
-     
+    estacao = "\n" + codigo + "," + nome + "," + latitude + "," + longitude
+    gravarFicheiro = open("estacoes.csv", 'a')
+    gravarFicheiro.write(estacao)
+    gravarFicheiro.close()
+
+#funcão para tratar adição de carris
+def criarCarril():
+    print('Indique nome da primeira estação')
+    nome1 = input().upper()
+    print('Indique o nome da segunda estação')
+    nome2 = input()
+    print('distancia')
+    dist = input()
+    carril = "\n" + nome1 + "," + nome2 + "," + dist
+    gravarFicheiro = open("carris.csv", 'a')
+    gravarFicheiro.write(carril)
+    gravarFicheiro.close()
+
+def criarComboio():
+    print('Indique modelo')
+    modelo = input().upper()
+    print('Indique nº de serie')
+    nSerie = input().upper()
+    print('Indique nº de passageiros')
+    nPax = input()
+    print('indique serviço')
+    servico = input().upper()
+    comboio = "\n" + modelo + "," + nSerie  + "," + nPax + "," + servico
+    gravarFicheiro = open("comboios.csv", 'a')
+    gravarFicheiro.write(comboio)
+    gravarFicheiro.close()  
 
 def menuGestao():
-    #Codigo para adicionar estção
     escolhaGestao = ''
     while escolhaGestao != 'x' :
-        print('Escolha uma das opções :\n A:Adicionar estação \n X:sair')
+        print('Escolha uma das opções :\n A:Adicionar estação \n B:Adicionar carril \n C:Adicionar comboio \n X:sair')
         escolhaGestao = input().lower()
             
         if escolhaGestao == 'a':
             criarEstacao()
+            
+        if escolhaGestao == 'b':
+            criarCarril()
+        
+        if escolhaGestao == 'c':
+            criarComboio()
             
         elif escolhaGestao == 'x':
             print('A sair')

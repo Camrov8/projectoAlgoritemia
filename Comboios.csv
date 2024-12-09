@@ -1,4 +1,3 @@
-Modelo,NumeroSerie,MaxPassageiros,TipoServico
-Alfa Pendular,Comboio1,300,Alfa Pendular
-Regional 2000,Comboio2,150,Regional
-Inter-Cidades 3000,Comboio3,200,Inter-Cidades
+Alfa,s100,300,Alfa Pendular
+Beta,s2000,150,regional
+Gama,s3000,200,Inter-Cidades
