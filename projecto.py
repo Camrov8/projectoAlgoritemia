@@ -27,7 +27,7 @@ def criarCarril():
     gravarFicheiro = open("carris.csv", 'a')
     gravarFicheiro.write(carril)
     gravarFicheiro.close()
-
+#função para tratar da adição de comboios
 def criarComboio():
     print('Indique modelo')
     modelo = input().upper()
@@ -42,6 +42,7 @@ def criarComboio():
     gravarFicheiro.write(comboio)
     gravarFicheiro.close()  
 
+#Função destinada a gerir a criação dos varios pedidos comboios e etc
 def menuGestao():
     escolhaGestao = ''
     while escolhaGestao != 'x' :
@@ -62,17 +63,32 @@ def menuGestao():
             
         else :
             print('Opção invalida')
-        
 
-escolhaPrincipal=''
+def criarLinha ():
+    
+
+
+#Função para gestão da criação de linhas e viagens
+def menuLinha():
+    escolha=''
+while escolha!='x':
+    print('Escolha uma das opções :\n A:criar linha \n B:Criar viagem \n X:sair')
+
+    escolha=input().lower
+
+    if escolha == 'a'
+        criarLinha()
 
 while escolhaPrincipal != 'x':
-    print("Menu informativo \n Escolha uma opção \n A:Gestão \n B:LISTAGEM \n C:Viagens \n X:sair")
+    print("Menu informativo \n Escolha uma opção \n A:Gestão \n B:LISTAGEM \n C:Viagens \n D:Criaçao linha/viagem \n X:sair")
 
     escolhaPrincipal = input().lower()
 
     if escolhaPrincipal == 'a':
-       menuGestao() 
+       menuGestao()
+
+    if escolhaPrincipal =='d':
+        menuLinha()
         
                 
     elif escolhaPrincipal == 'x':
