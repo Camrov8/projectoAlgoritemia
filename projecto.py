@@ -64,28 +64,49 @@ def menuGestao():
         else :
             print('Opção invalida')
 
-def criarLinha ():
-    
+def criarLinha():
+    lerLinhas = open('./carris.csv', 'r')
+    linhas = lerLinhas.readlines()
 
+    sair = False
+     
+    while sair == False:
+        print('Indique as duas estações para criar a linha /n Indique estação Inicial')
+        estacaoA = input()
+        print('insira estação B')
+        estacaoB = input()
+
+        existeCarril = False
+
+        # Verificar Carris
+        for line in linhas:
+            if estacaoA not in line and estacaoB in line:  
+                existeCarril = True
+                break  
+
+        if not existeCarril:
+            print("não existe linha")
 
 #Função para gestão da criação de linhas e viagens
 def menuLinha():
     escolha=''
-while escolha!='x':
-    print('Escolha uma das opções :\n A:criar linha \n B:Criar viagem \n X:sair')
+    while escolha!='x':
+        print('Escolha uma das opções :\n A:criar linhas \n B:Criar viagem \n X:sair')
 
-    escolha=input().lower
+        escolha = input().lower()
+        if escolha == 'a':
+            criarLinha()
 
-    if escolha == 'a'
-        criarLinha()
 
+############ PROGRAM ############
+escolhaPrincipal=''
 while escolhaPrincipal != 'x':
     print("Menu informativo \n Escolha uma opção \n A:Gestão \n B:LISTAGEM \n C:Viagens \n D:Criaçao linha/viagem \n X:sair")
 
     escolhaPrincipal = input().lower()
 
     if escolhaPrincipal == 'a':
-       menuGestao()
+        menuGestao()
 
     if escolhaPrincipal =='d':
         menuLinha()
@@ -94,15 +115,10 @@ while escolhaPrincipal != 'x':
     elif escolhaPrincipal == 'x':
         print('A sair')
         
-    
     else :
         print('Opção invalida')
                 
             
-
-
-
-
 
 
 
