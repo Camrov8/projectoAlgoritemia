@@ -63,7 +63,8 @@ def menuGestao():
             
         else :
             print('Opção invalida')
-
+            
+#função para criar linha
 def criarLinha():
     lerLinhas = open('./carris.csv', 'r')
     linhas = lerLinhas.readlines()
@@ -75,6 +76,7 @@ def criarLinha():
         estacaoA = input()
         print('insira estação B')
         estacaoB = input()
+        criarLinha=''
 
         existeCarril = False
 
@@ -83,30 +85,81 @@ def criarLinha():
             if estacaoA not in line and estacaoB in line:  
                 existeCarril = True
                 break  
-
+           # else:
+        '''        
         if not existeCarril:
             print("não existe linha")
+            '''
 
-#Função para gestão da criação de linhas e viagens
+#Função para gestão da criação de linhas e viagens(incompleto)
 def menuLinha():
-    escolha=''
-    while escolha!='x':
+    escolha = ''
+    while escolha!= 'x':
         print('Escolha uma das opções :\n A:criar linhas \n B:Criar viagem \n X:sair')
 
         escolha = input().lower()
         if escolha == 'a':
             criarLinha()
 
+#Função para tratar da listagem das estações
+def listaEstacoes():
+    lerEstacoes = open('./Estacoes.csv','r')
+    estacoes = lerEstacoes.readlines()
+    lerEstacoes.close()
+    
+    for estacao in estacoes:
+        print(estacao)
+
+#Função para tratar da listagem das linhas
+def listaLinhas():
+    lerLinhas = open('./Linhas.csv','r')
+    linhas = lerLinhas.readlines()
+    lerLinhas.close()
+    
+    for linha in linhas:
+        print(linha)
+
+#Função para tratar da listagem dos Comboios 
+def listaComboios():
+    lerComboios = open('./Comboios.csv','r')
+    comboios = lerComboios.readlines()
+    lerComboios.close()
+    
+    for Comboio in comboios:
+        print(Comboio)
+
+#função que vai gerir as listagens
+def menuListar ():
+    escolha=''
+    while escolha !='x' :
+        print('inidque o que lista deseja aceder \n A:Estações \n B:Linhas \n C:Comboios \n X:sair')  
+        escolha=input().lower()
+
+        if escolha == 'a':
+            listaEstacoes()
+
+        if escolha == 'b':
+            listaLinhas()
+
+        if escolha == 'c':
+            listaComboios()
+
+        if escolha == 'x':
+            print('A sair')             
+        
 
 ############ PROGRAM ############
 escolhaPrincipal=''
 while escolhaPrincipal != 'x':
-    print("Menu informativo \n Escolha uma opção \n A:Gestão \n B:LISTAGEM \n C:Viagens \n D:Criaçao linha/viagem \n X:sair")
+    print("Menu informativo \n Escolha uma opção \n A:Gestão \n B:Listagem \n C:Viagens \n D:Criaçao linha/viagem \n X:sair")
 
     escolhaPrincipal = input().lower()
 
     if escolhaPrincipal == 'a':
         menuGestao()
+
+    if escolhaPrincipal == 'b':
+        menuListar()
 
     if escolhaPrincipal =='d':
         menuLinha()
@@ -123,5 +176,4 @@ while escolhaPrincipal != 'x':
 
 
 
-#para suporte para apagar
-#PCAM,Porto Campanhã, Latitude: 3, Longitude: 4
+
