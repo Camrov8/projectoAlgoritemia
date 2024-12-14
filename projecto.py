@@ -1,5 +1,7 @@
 #Este ficheiro contem o programa pedido para o projecto final da desciplina de algoritmia
 import os
+
+#Bloco destinado aos varios tipos de pedidos
 #funcão para tratar adição de estações
 def criarEstacao():
     print('Indique codigo da estação')
@@ -42,7 +44,7 @@ def criarComboio():
     gravarFicheiro.write(comboio)
     gravarFicheiro.close()  
 
-#Função destinada a gerir a criação dos varios pedidos comboios e etc
+#Função destinada a gerir a criação dos varios pedidos de criação comboios e etc
 def menuGestao():
     escolhaGestao = ''
     while escolhaGestao != 'x' :
@@ -100,7 +102,7 @@ def menuLinha():
         escolha = input().lower()
         if escolha == 'a':
             criarLinha()
-
+#Bloco destinado as funções destinadas as listagens
 #Função para tratar da listagem das estações
 def listaEstacoes():
     lerEstacoes = open('./Estacoes.csv','r')
@@ -145,13 +147,42 @@ def menuListar ():
             listaComboios()
 
         if escolha == 'x':
-            print('A sair')             
-        
+            print('A sair')
+#Bloco destinado as varias funções de pesquisa
+def procuraComboios():
+    lerComboios = open('./Comboios.csv','r')
+    comboios = lerComboios.readlines().lower()
+    lerComboios.close()
+    escolha =''
 
-############ PROGRAM ############
+    while escolha !='x'
+
+    print('Indique o Modelo e/ou numero de passageiros /n X:Sair')
+    print('Modelo: ')
+    modelo = input().lower
+    print('Nº max passageiros: ')
+    maxPax = input()
+
+    if len(modelo)< 2 and len(maxPax)< 2 :
+        print('valores invalidos insira novamente')
+    
+
+#função destinada as pesquisas 
+def menuPesquisa ():
+    escolha = ''
+
+    while escolha !='x'
+
+        print('Seleccione uma opção \n A:Procurar comboios \n X:Sair'
+        escolha = input().lower()
+
+        if escolha == 'a':
+              procuraComboios()
+              
+############ PROGRAMA ############
 escolhaPrincipal=''
 while escolhaPrincipal != 'x':
-    print("Menu informativo \n Escolha uma opção \n A:Gestão \n B:Listagem \n C:Viagens \n D:Criaçao linha/viagem \n X:sair")
+    print("Menu informativo \n Escolha uma opção \n A:Gestão \n B:Listagem \n C:Viagens \n D:Criaçao linha/viagem \n E:Pesquisa \n X:sair")
 
     escolhaPrincipal = input().lower()
 
@@ -163,7 +194,9 @@ while escolhaPrincipal != 'x':
 
     if escolhaPrincipal =='d':
         menuLinha()
-        
+
+    if escolhaPrincipal =='E':
+        menuPesquisa()
                 
     elif escolhaPrincipal == 'x':
         print('A sair')
