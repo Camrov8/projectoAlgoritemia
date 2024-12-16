@@ -181,7 +181,7 @@ def procuraLinha ():
     linhas = lerLinhas.readlines()
     lerLinhas.close()
     escolha =''
-    listaEstacao=[]
+    listaLinhas=[]
     
     while escolha != 'x':
 
@@ -190,10 +190,12 @@ def procuraLinha ():
 
         for line in linhas:
             if estacao in line.upper():
-                listaEstacao.append(line)
+                listaLinhas.append(line)
         escolha = 'x'
                 
-    print(listaEstacao)           
+    for linha in listaLinhas:
+        print(linha)
+        
 
 
 #função destinada as pesquisas 
