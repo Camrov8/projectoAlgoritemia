@@ -66,11 +66,11 @@ def menuGestao():
         else :
             print('Opção invalida')
             
-#função para criar linha
+#função para criar linha(incompleto)
 def criarLinha():
     lerLinhas = open('./carris.csv', 'r')
     linhas = lerLinhas.readlines()
-
+    lerLinhas.close() 
     sair = False
      
     while sair == False:
@@ -80,18 +80,13 @@ def criarLinha():
         estacaoB = input()
         criarLinha=''
 
-        existeCarril = False
-
         # Verificar Carris
         for line in linhas:
-            if estacaoA not in line and estacaoB in line:  
-                existeCarril = True
+            if estacaoA  in line and estacaoB in line:  
                 break  
-           # else:
-        '''        
-        if not existeCarril:
-            print("não existe linha")
-            '''
+            else:
+               print("não existe linha")
+            
 
 #Função para gestão da criação de linhas e viagens(incompleto)
 def menuLinha():
@@ -102,6 +97,9 @@ def menuLinha():
         escolha = input().lower()
         if escolha == 'a':
             criarLinha()
+
+        if escolha == 'b':
+            criarViagen()
 #Bloco destinado as funções destinadas as listagens
 #Função para tratar da listagem das estações
 def listaEstacoes():
@@ -151,33 +149,67 @@ def menuListar ():
 #Bloco destinado as varias funções de pesquisa
 def procuraComboios():
     lerComboios = open('./Comboios.csv','r')
-    comboios = lerComboios.readlines().lower()
+    comboios = lerComboios.readlines()
     lerComboios.close()
     escolha =''
 
-    while escolha !='x'
+    while escolha !='x':
 
-    print('Indique o Modelo e/ou numero de passageiros /n X:Sair')
-    print('Modelo: ')
-    modelo = input().lower
-    print('Nº max passageiros: ')
-    maxPax = input()
+        print('Indique o Modelo ou deixe em branco para procurar pelo numero de passageiros /n X:Sair')
+        print('Modelo: ')
+        modelo = str(input().lower())
+        if modelo == '':
+            print('Nº max passageiros: ')
+            maxPax = str(input())
+        
+        
+        if modelo == ''  and maxPax =='' :
+            print('valores invalidos insira novamente')
+        else:
+            for comboio in comboios:
+                
+                comboio = comboio.split(',')
+                
+                
+                if comboio[0].lower() == modelo or comboio[2] == maxPax:
+                    print('comboio Encotrado: ', comboio)
 
-    if len(modelo)< 2 and len(maxPax)< 2 :
-        print('valores invalidos insira novamente')
+#Função para pesquisar linhas
+
+def procuraLinha ():
+    lerLinhas = open('./Linhas.csv','r')
+    linhas = lerLinhas.readlines()
+    lerLinhas.close()
+    escolha =''
+    listaEstacao=[]
     
+    while escolha != 'x':
+
+        print('indique a estação que deseja procurar as linhas:')
+        estacao = input().upper()
+
+        for line in linhas:
+            if estacao in line.upper():
+                listaEstacao.append(line)
+        escolha = 'x'
+                
+    print(listaEstacao)           
+
 
 #função destinada as pesquisas 
 def menuPesquisa ():
     escolha = ''
 
-    while escolha !='x'
+    while escolha !='x':
 
-        print('Seleccione uma opção \n A:Procurar comboios \n X:Sair'
+        print('Seleccione uma opção \n A:Procurar comboios \n B:Procura de linha \n X:Sair')
         escolha = input().lower()
 
         if escolha == 'a':
               procuraComboios()
+              
+        elif escolha == 'b':
+              procuraLinha()
               
 ############ PROGRAMA ############
 escolhaPrincipal=''
@@ -195,7 +227,7 @@ while escolhaPrincipal != 'x':
     if escolhaPrincipal =='d':
         menuLinha()
 
-    if escolhaPrincipal =='E':
+    if escolhaPrincipal =='e':
         menuPesquisa()
                 
     elif escolhaPrincipal == 'x':
