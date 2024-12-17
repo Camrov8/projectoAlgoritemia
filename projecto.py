@@ -1,5 +1,7 @@
 #Este ficheiro contem o programa pedido para o projecto final da desciplina de algoritmia
 import os
+
+#Bloco destinado aos varios tipos de pedidos
 #funcão para tratar adição de estações
 def criarEstacao():
     print('Indique codigo da estação')
@@ -42,7 +44,7 @@ def criarComboio():
     gravarFicheiro.write(comboio)
     gravarFicheiro.close()  
 
-#Função destinada a gerir a criação dos varios pedidos comboios e etc
+#Função destinada a gerir a criação dos varios pedidos de criação comboios e etc
 def menuGestao():
     escolhaGestao = ''
     while escolhaGestao != 'x' :
@@ -64,11 +66,11 @@ def menuGestao():
         else :
             print('Opção invalida')
             
-#função para criar linha
+#função para criar linha(incompleto)
 def criarLinha():
     lerLinhas = open('./carris.csv', 'r')
     linhas = lerLinhas.readlines()
-
+    lerLinhas.close() 
     sair = False
      
     while sair == False:
@@ -78,18 +80,13 @@ def criarLinha():
         estacaoB = input()
         criarLinha=''
 
-        existeCarril = False
-
         # Verificar Carris
         for line in linhas:
-            if estacaoA not in line and estacaoB in line:  
-                existeCarril = True
+            if estacaoA  in line and estacaoB in line:  
                 break  
-           # else:
-        '''        
-        if not existeCarril:
-            print("não existe linha")
-            '''
+            else:
+               print("não existe linha")
+            
 
 #Função para gestão da criação de linhas e viagens(incompleto)
 def menuLinha():
@@ -101,6 +98,9 @@ def menuLinha():
         if escolha == 'a':
             criarLinha()
 
+        if escolha == 'b':
+            criarViagen()
+#Bloco destinado as funções destinadas as listagens
 #Função para tratar da listagem das estações
 def listaEstacoes():
     lerEstacoes = open('./Estacoes.csv','r')
@@ -145,13 +145,105 @@ def menuListar ():
             listaComboios()
 
         if escolha == 'x':
-            print('A sair')             
+            print('A sair')
+#Bloco destinado as varias funções de pesquisa
+def procuraComboios():
+    lerComboios = open('./Comboios.csv','r')
+    comboios = lerComboios.readlines()
+    lerComboios.close()
+    escolha =''
+
+    while escolha !='x':
+
+        print('Indique o Modelo ou deixe em branco para procurar pelo numero de passageiros /n X:Sair')
+        print('Modelo: ')
+        modelo = str(input().lower())
+        if modelo == '':
+            print('Nº max passageiros: ')
+            maxPax = str(input())
+        
+        
+        if modelo == ''  and maxPax =='' :
+            print('valores invalidos insira novamente')
+        else:
+            for comboio in comboios:
+                
+                comboio = comboio.split(',')
+                
+                
+                if comboio[0].lower() == modelo or comboio[2] == maxPax:
+                    print('comboio Encotrado: ', comboio)
+
+#Função para pesquisar linhas
+
+def procuraLinha ():
+    lerLinhas = open('./Linhas.csv','r')
+    linhas = lerLinhas.readlines()
+    lerLinhas.close()
+    escolha =''
+    listaLinhas=[]
+    
+    while escolha != 'x':
+
+        print('indique a estação que deseja procurar as linhas:')
+        estacao = input().upper()
+
+        for line in linhas:
+            if estacao in line.upper():
+                listaLinhas.append(line)
+        escolha = 'x'
+                
+    for linha in listaLinhas:
+        print(linha)
+        
+#Função para procura de Viagens
+
+def procuraViagem():
+    lerViagens = open('./Viagens.csv','r')
+    viagens = lerViagens.readlines()
+    lerViagens.close()
+    escolha =''
+
+    print('indique a estação inicial')
+    estacaoA = input().lower()
+    print('indique a estacao final')
+    estacaoB = input().lower()
+    lista = []
+    
+    for viagem in viagens:
+        splitViagem = viagem.split(',')
+
+        estacaoInicialViagem = splitViagem[3].split('#')[0].lower()
+        estacaoFinalViagem = splitViagem[len(splitViagem) - 1].split('#')[0].lower()
+        
+        if estacaoInicialViagem == estacaoA and estacaoFinalViagem == estacaoB :
+            lista.append(viagem)
+            
+    print(lista)        
         
 
-############ PROGRAM ############
+#função destinada as pesquisas 
+def menuPesquisa ():
+    escolha = ''
+
+    while escolha !='x':
+
+        print('Seleccione uma opção \n A:Procurar comboios \n B:Procura de linha \n C:Procurar Viagem \n X:Sair')
+        escolha = input().lower()
+
+        if escolha == 'a':
+              procuraComboios()
+              
+        elif escolha == 'b':
+              procuraLinha()
+
+        elif escolha == 'c':
+              procuraViagem()
+              
+############ PROGRAMA ############
 escolhaPrincipal=''
 while escolhaPrincipal != 'x':
-    print("Menu informativo \n Escolha uma opção \n A:Gestão \n B:Listagem \n C:Viagens \n D:Criaçao linha/viagem \n X:sair")
+    print("Menu informativo \n Escolha uma opção \n A:Gestão \n B:Listagem \n C:Viagens \n D:Criaçao linha/viagem \n E:Pesquisa \n X:sair")
 
     escolhaPrincipal = input().lower()
 
@@ -163,7 +255,9 @@ while escolhaPrincipal != 'x':
 
     if escolhaPrincipal =='d':
         menuLinha()
-        
+
+    if escolhaPrincipal =='e':
+        menuPesquisa()
                 
     elif escolhaPrincipal == 'x':
         print('A sair')
