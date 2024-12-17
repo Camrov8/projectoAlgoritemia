@@ -6,13 +6,39 @@ import os
 def criarEstacao():
     print('Indique codigo da estação')
     codigo = input().upper()
+
+    while not codigo.isalpha():
+        if not codigo.isalpha():
+            print('insira so letras')
+            codigo = input().upper()
+
     print('Indique o nome')
-    nome = input()
+    nome = input().upper()
+
+    while not nome.replace(" ", "").isalpha():
+        if not nome.replace(" ", "").isalpha():
+            print('insira so letras')
+            nome = input().upper()
+    
     print('Indique a latitude')
     latitude = input()
+
+    while not latitude.isdigit():
+        if not latitude.isdigit():
+            print('insira so algarismos')
+            latitude = input()
+
+    
+    
     print('Indique a longitude')
-    longitude = input()
-    estacao = "\n" + codigo + "," + nome + "," + latitude + "," + longitude
+    longitude =input()
+
+    while not longitude.isdigit():
+        if not longitude.isdigit():
+            print('insira so algarismos')
+            longitude = input()
+
+    estacao = "\n" + codigo + "," + nome + "," + 'Latitude:' + latitude + "," + 'Longitude:' + longitude
     gravarFicheiro = open("estacoes.csv", 'a')
     gravarFicheiro.write(estacao)
     gravarFicheiro.close()
@@ -54,17 +80,17 @@ def menuGestao():
         if escolhaGestao == 'a':
             criarEstacao()
             
-        if escolhaGestao == 'b':
+        elif escolhaGestao == 'b':
             criarCarril()
         
-        if escolhaGestao == 'c':
+        elif escolhaGestao == 'c':
             criarComboio()
             
         elif escolhaGestao == 'x':
             print('A sair')
             
         else :
-            print('Opção invalida')
+            print('Opção de menu gestão invalida')
             
 #função para criar linha(incompleto)
 def criarLinha():
