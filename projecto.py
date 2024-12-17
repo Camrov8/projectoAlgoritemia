@@ -196,7 +196,30 @@ def procuraLinha ():
     for linha in listaLinhas:
         print(linha)
         
+#Função para procura de Viagens
+def procuraViagem():
+    lerViagens = open('./Viagens.csv','r')
+    viagens = lerViagens.readlines()
+    lerViagens.close()
+    escolha =''
 
+    print('indique a estação inicial')
+    estacaoA = input().lower()
+    print('indique a estacao final')
+    estacaoB = input().lower()
+    lista = []
+    
+    for viagem in viagens:
+        splitViagem = viagem.split(',')
+
+        estacaoInicialViagem = splitViagem[3].split('#')[0].lower()
+        estacaoFinalViagem = splitViagem[len(splitViagem) - 1].split('#')[0].lower()
+        
+        if estacaoInicialViagem == estacaoA and estacaoFinalViagem == estacaoB :
+            lista.append(viagem)
+            
+    print(lista)        
+        
 
 #função destinada as pesquisas 
 def menuPesquisa ():
@@ -204,7 +227,7 @@ def menuPesquisa ():
 
     while escolha !='x':
 
-        print('Seleccione uma opção \n A:Procurar comboios \n B:Procura de linha \n X:Sair')
+        print('Seleccione uma opção \n A:Procurar comboios \n B:Procura de linha \n C:Procurar Viagem \n X:Sair')
         escolha = input().lower()
 
         if escolha == 'a':
@@ -212,6 +235,9 @@ def menuPesquisa ():
               
         elif escolha == 'b':
               procuraLinha()
+
+        elif escolha == 'c':
+              procuraViagem()
               
 ############ PROGRAMA ############
 escolhaPrincipal=''
